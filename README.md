@@ -12,6 +12,7 @@ Open `index.html` in a browser. The site uses plain HTML, CSS, and JavaScript wi
 - Add a verified, current song list and arrangements when ready.
 - Replace the testimonial placeholder with approved, genuine quotes when available.
 - Review member names, roles, and band history for accuracy before publication.
+- Replace generic video captions with event names and dates when confirmed.
 
 ## Booking requests
 
