@@ -1,6 +1,27 @@
 const nav = document.querySelector('.primary-nav');
 const menuToggle = document.querySelector('.menu-toggle');
 const bookingDialog = document.querySelector('#booking-dialog');
+const themeToggle = document.querySelector('#theme-toggle');
+const themeLabel = themeToggle.querySelector('.theme-label');
+const themeIcon = themeToggle.querySelector('[aria-hidden="true"]');
+const root = document.documentElement;
+function setTheme(theme, save = false) {
+  const dark = theme !== 'light';
+  root.dataset.theme = dark ? 'dark' : 'light';
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#080d1d' : '#fbfaf8';
+  themeToggle.setAttribute('aria-pressed', String(dark));
+  themeToggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
+  themeLabel.textContent = dark ? 'Light mode' : 'Dark mode';
+  themeIcon.textContent = dark ? '☼' : '☾';
+  if (save) {
+    try { localStorage.setItem('innoband-theme', dark ? 'dark' : 'light'); } catch {}
+  }
+}
+let savedTheme = 'dark';
+try { savedTheme = localStorage.getItem('innoband-theme') || 'dark'; } catch {}
+setTheme(savedTheme);
+themeToggle.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true));
+
 menuToggle.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(open));
@@ -10,7 +31,17 @@ nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () =>
   menuToggle.setAttribute('aria-expanded', 'false');
 }));
 
-document.querySelectorAll('.open-booking').forEach((button) => button.addEventListener('click', () => bookingDialog.showModal()));
+const songRequestField = document.querySelector('[name="songRequests"]');
+function openBooking() {
+  if (selectedSongs.size) {
+    songRequestField.value = [...selectedSongs].sort((a, b) => a - b)
+      .map((number) => `${String(number).padStart(2, '0')} — ${songTitles[number - 1]}`)
+      .join('\n');
+  }
+  bookingDialog.showModal();
+}
+document.querySelectorAll('.open-booking').forEach((button) => button.addEventListener('click', openBooking));
+document.querySelector('#use-setlist').addEventListener('click', openBooking);
 document.querySelector('.dialog-close').addEventListener('click', () => bookingDialog.close());
 bookingDialog.addEventListener('click', (event) => {
   if (event.target === bookingDialog) bookingDialog.close();
@@ -38,6 +69,23 @@ const songTitles = [
 const songList = document.querySelector('#song-list');
 const songCount = document.querySelector('#song-count');
 const search = document.querySelector('#song-search');
+const setlistCount = document.querySelector('#setlist-count');
+const clearSetlist = document.querySelector('#clear-setlist');
+const useSetlist = document.querySelector('#use-setlist');
+let selectedSongs = new Set();
+try {
+  const storedSongs = JSON.parse(localStorage.getItem('innoband-setlist') || '[]');
+  if (Array.isArray(storedSongs)) selectedSongs = new Set(storedSongs.filter((number) => Number.isInteger(number) && number >= 1 && number <= songTitles.length));
+} catch {}
+function saveSetlist() {
+  try { localStorage.setItem('innoband-setlist', JSON.stringify([...selectedSongs])); } catch {}
+}
+function updateSetlistSummary() {
+  const count = selectedSongs.size;
+  setlistCount.textContent = `${count} ${count === 1 ? 'song' : 'songs'} picked`;
+  clearSetlist.disabled = count === 0;
+  useSetlist.disabled = count === 0;
+}
 function renderSongs() {
   const query = search.value.trim().toLocaleLowerCase();
   const visibleSongs = songTitles.map((title, index) => ({ title, number: index + 1 }))
@@ -51,7 +99,26 @@ function renderSongs() {
     const name = document.createElement('span');
     name.className = 'song-row-title';
     name.textContent = title;
-    row.append(id, name);
+    const pick = document.createElement('button');
+    const isSelected = selectedSongs.has(number);
+    row.classList.toggle('is-selected', isSelected);
+    pick.className = 'song-pick';
+    pick.type = 'button';
+    pick.setAttribute('aria-pressed', String(isSelected));
+    pick.setAttribute('aria-label', `${isSelected ? 'Remove' : 'Add'} ${title} ${isSelected ? 'from' : 'to'} your request list`);
+    pick.textContent = isSelected ? 'Added ✓' : '+ Add';
+    pick.addEventListener('click', () => {
+      if (selectedSongs.has(number)) selectedSongs.delete(number);
+      else selectedSongs.add(number);
+      const added = selectedSongs.has(number);
+      row.classList.toggle('is-selected', added);
+      pick.setAttribute('aria-pressed', String(added));
+      pick.setAttribute('aria-label', `${added ? 'Remove' : 'Add'} ${title} ${added ? 'from' : 'to'} your request list`);
+      pick.textContent = added ? 'Added ✓' : '+ Add';
+      saveSetlist();
+      updateSetlistSummary();
+    });
+    row.append(id, name, pick);
     return row;
   }));
   songCount.textContent = `${visibleSongs.length} of ${songTitles.length} songs`;
@@ -63,6 +130,13 @@ function renderSongs() {
   }
 }
 search.addEventListener('input', renderSongs);
+clearSetlist.addEventListener('click', () => {
+  selectedSongs.clear();
+  saveSetlist();
+  updateSetlistSummary();
+  renderSongs();
+});
+updateSetlistSummary();
 renderSongs();
 
 document.querySelector('#booking-form').addEventListener('submit', (event) => {

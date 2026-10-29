@@ -10,15 +10,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="design-refresh.css">
+  <link rel="stylesheet" href="midnight-stage.css">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="MSU-MCEST Innovation Band home">
-      <span class="brand-mark brand-logo" role="img" aria-label="Innovation Band logo"></span>
+      <img class="brand-logo" src="assets/media/innovation-band-logo.png" alt="Innovation Band logo">
       <span class="brand-copy"><strong>INNOVATION BAND</strong><small>MSU-MCEST · MAIGO</small></span>
     </a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span></button>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light mode"><span aria-hidden="true">☼</span><span class="theme-label">Light mode</span></button>
     <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
       <a href="#songs">Song list</a><a href="#performances">Performances</a><a href="#about">Our band</a><a href="#voices">Testimonials</a><a href="#faq">FAQs</a>
       <a class="nav-book" href="#booking">Book the band <span aria-hidden="true">↗</span></a>
@@ -35,7 +36,7 @@
         <div class="hero-note"><span class="note-icon">♫</span><span><strong>Made for the moment</strong><small>University · Community · Celebration</small></span></div>
       </div>
       <div class="hero-art" aria-label="Illustration of a university band performing together">
-        <div class="sunburst"></div><div class="art-tag">INNOVATION BAND · LIVE <span>✳</span></div><img class="hero-photo" src="assets/media/photo-stage-band.jpg" alt="Innovation Band members performing on stage at a campus event" fetchpriority="high">
+        <div class="sunburst"></div><div class="art-tag">INNOVATION BAND · LIVE <span>✳</span></div><img class="hero-photo" src="assets/media/photo-anniversary-group.jpg" alt="Innovation Band members together in their cream MSU anniversary uniforms" fetchpriority="high">
         <svg class="band-art" viewBox="0 0 690 590" role="img" aria-label="Colorful illustration of student musicians playing brass and percussion">
           <defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#1d5a9d"/><stop offset="1" stop-color="#09274f"/></linearGradient><linearGradient id="gold" x1="0" x2="1"><stop stop-color="#ffcb3f"/><stop offset="1" stop-color="#fff0a6"/></linearGradient></defs>
           <rect x="30" y="42" width="630" height="510" rx="28" fill="url(#bg)"/>
@@ -88,6 +89,7 @@
       <div class="genre-grid"><article><span>01</span><h3>Old Pop &amp; Rock</h3><p>Familiar favorites, big choruses, and songs that bring a room together.</p></article><article><span>02</span><h3>Acoustic &amp; Reggae</h3><p>Easygoing grooves and warm sounds for relaxed gatherings.</p></article><article><span>03</span><h3>OPM &amp; More</h3><p>Filipino favorites and other styles that fit the event and the band's academic purpose.</p></article></div>
       <div class="song-policy"><span aria-hidden="true">♪</span><p><strong>Respectful by design.</strong> Innovation Band does not accept offensive or hate-driven material, or songs that are excessively loud. Share your ideas in the booking request; the band will confirm suitable selections.</p></div>
       <div class="song-tools catalog-search"><label class="search-box"><span aria-hidden="true">⌕</span><input id="song-search" type="search" placeholder="Search all 64 songs" aria-label="Search song titles"></label><span class="song-count" id="song-count" aria-live="polite">64 songs</span></div>
+      <div class="setlist-toolbar" aria-label="Setlist builder"><div class="setlist-summary"><strong>MY REQUEST LIST</strong><span id="setlist-count" aria-live="polite">0 songs picked</span></div><div class="setlist-actions"><button id="clear-setlist" type="button" disabled>Clear</button><button id="use-setlist" class="button button-yellow" type="button" disabled>Use in booking <span>↗</span></button></div></div>
       <div class="song-list" id="song-list" aria-live="polite"></div>
       <div class="song-cta"><span>Have a song request?</span><button class="text-link blue-link open-booking" type="button">Include its number in your booking request <span>↗</span></button></div>
     </section>
@@ -125,7 +127,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark brand-logo" role="img" aria-label="Innovation Band logo"></span><span class="brand-copy"><strong>INNOVATION BAND</strong><small>MSU-MCEST · MAIGO</small></span></a><p>Music for campus. Music for community.<br>Maigo, Lanao del Norte, Philippines</p><a class="footer-email" href="https://www.facebook.com/profile.php?id=100092439488308" target="_blank" rel="noreferrer">Follow us on Facebook ↗</a><div class="footer-bottom"><span>© <span id="year"></span> Innovation Band</span><span>Built with campus spirit <b>✳</b></span><a href="https://msumcest.edu.ph/" target="_blank" rel="noreferrer">MSU-MCEST website ↗</a></div></footer>
+  <footer class="site-footer"><a class="brand footer-brand" href="#home"><img class="brand-logo" src="assets/media/innovation-band-logo.png" alt="Innovation Band logo"><span class="brand-copy"><strong>INNOVATION BAND</strong><small>MSU-MCEST · MAIGO</small></span></a><p>Music for campus. Music for community.<br>Maigo, Lanao del Norte, Philippines</p><a class="footer-email" href="https://www.facebook.com/profile.php?id=100092439488308" target="_blank" rel="noreferrer">Follow us on Facebook ↗</a><div class="footer-bottom"><span>© <span id="year"></span> Innovation Band</span><span>Built with campus spirit <b>✳</b></span><a href="https://msumcest.edu.ph/" target="_blank" rel="noreferrer">MSU-MCEST website ↗</a></div></footer>
 
   <button class="floating-book open-booking" type="button"><span>BOOK NOW</span><b aria-hidden="true">↗</b></button>
   <dialog class="booking-dialog" id="booking-dialog" aria-labelledby="dialog-title"><div class="dialog-head"><div><div class="eyebrow blue-eyebrow">INNOVATION BAND · BOOKING</div><h2 id="dialog-title">Tell us about<br><em>your event.</em></h2></div><button class="dialog-close" type="button" aria-label="Close booking form">×</button></div>
