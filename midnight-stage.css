@@ -324,6 +324,34 @@ h1, h2 { margin-top: 0; font-family: var(--heading); letter-spacing: -.06em; lin
 :root[data-theme="light"] .booking-contact > span { background: #6e56a81a; color: var(--violet); }
 :root[data-theme="light"] .search-box { color: #795000; }
 
+/* The older base stylesheet adds pale zebra stripes to song rows. Keep each
+   stripe and its text aligned with the active theme. */
+:root[data-theme="dark"] .song-section .song-row:nth-child(4n + 1):not(.is-selected),
+:root[data-theme="dark"] .song-section .song-row:nth-child(4n + 2):not(.is-selected),
+:root[data-theme="light"] .song-section .song-row:nth-child(4n + 1):not(.is-selected),
+:root[data-theme="light"] .song-section .song-row:nth-child(4n + 2):not(.is-selected) { background: var(--panel); }
+:root[data-theme="dark"] .song-section .song-row:nth-child(4n + 3):not(.is-selected),
+:root[data-theme="dark"] .song-section .song-row:nth-child(4n):not(.is-selected),
+:root[data-theme="light"] .song-section .song-row:nth-child(4n + 3):not(.is-selected),
+:root[data-theme="light"] .song-section .song-row:nth-child(4n):not(.is-selected) { background: var(--page); }
+:root[data-theme="dark"] .song-section .song-row-title { color: #f8f7f4; }
+:root[data-theme="light"] .song-section .song-row-title { color: #18233a; }
+:root[data-theme="dark"] .song-section .song-row-number { color: #f4c13e; }
+:root[data-theme="light"] .song-section .song-row-number { color: #795000; }
+:root[data-theme="dark"] .song-section .song-pick:not([aria-pressed="true"]) { border-color: #ffffff45; background: #101a31; color: #dbe3ef; }
+:root[data-theme="light"] .song-section .song-pick:not([aria-pressed="true"]) { border-color: #b8c1cf; background: #fbfaf8; color: #43536b; }
+:root[data-theme="dark"] .song-section .song-count,
+:root[data-theme="dark"] .song-section .setlist-summary span,
+:root[data-theme="dark"] .song-section .song-policy,
+:root[data-theme="dark"] .song-section .song-cta,
+:root[data-theme="dark"] .song-section .setlist-actions > button:not(.button) { color: #b2bfd2; }
+:root[data-theme="light"] .song-section .song-count,
+:root[data-theme="light"] .song-section .setlist-summary span,
+:root[data-theme="light"] .song-section .song-policy,
+:root[data-theme="light"] .song-section .song-cta,
+:root[data-theme="light"] .song-section .setlist-actions > button:not(.button) { color: #526078; }
+.song-section .setlist-actions > button:not(.button):disabled { opacity: .72; }
+
 /* Give supporting copy enough size and contrast to stay readable in both themes. */
 .primary-nav { font-size: 12px; }
 .eyebrow, .blue-eyebrow, .hero .eyebrow { font-size: 10px; }
