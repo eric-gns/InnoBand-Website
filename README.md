@@ -9,10 +9,11 @@ Open `index.html` in a browser. The site uses plain HTML, CSS, and JavaScript wi
 ## Update before launch
 
 - Add approved band and performance photos or video.
-- Add a verified, current song list and arrangements when ready.
+- Confirm the song catalog and arrangements with the band.
 - Replace the testimonial placeholder with approved, genuine quotes when available.
 - Review member names, roles, and band history for accuracy before publication.
 - Replace generic video captions with event names and dates when confirmed.
+- The current song catalog is transcribed from the supplied song-list graphic; confirm spellings such as “Atik Ra,” “Balanghoy Gabi,” and “Idana” before launch.
 
 ## Booking requests
 
