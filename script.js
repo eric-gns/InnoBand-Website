@@ -1,5 +1,6 @@
 const nav = document.querySelector('.primary-nav');
 const menuToggle = document.querySelector('.menu-toggle');
+const bookingDialog = document.querySelector('#booking-dialog');
 menuToggle.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(open));
@@ -8,6 +9,12 @@ nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () =>
   nav.classList.remove('open');
   menuToggle.setAttribute('aria-expanded', 'false');
 }));
+
+document.querySelectorAll('.open-booking').forEach((button) => button.addEventListener('click', () => bookingDialog.showModal()));
+document.querySelector('.dialog-close').addEventListener('click', () => bookingDialog.close());
+bookingDialog.addEventListener('click', (event) => {
+  if (event.target === bookingDialog) bookingDialog.close();
+});
 
 const search = document.querySelector('#song-search');
 const songs = [...document.querySelectorAll('.song-card')];
@@ -41,11 +48,13 @@ document.querySelector('#booking-form').addEventListener('submit', (event) => {
     `Venue: ${data.get('venue')}`,
     `Estimated audience: ${data.get('audience')}`,
     `Performance length: ${data.get('duration')}`,
+    'Performance format: typically 3–5 sets, around 8 songs per set',
+    `Electricity source available at venue: ${data.get('power')}`,
     `Additional notes: ${data.get('notes') || 'None provided'}`, '',
     'Please let me know about availability and next steps.', '',
     'Thank you!'
   ];
-  const subject = `Band booking request — ${data.get('date')}`;
+  const subject = `Innovation Band booking request — ${data.get('date')}`;
   window.location.href = `mailto:markericgenosa2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
 });
 
