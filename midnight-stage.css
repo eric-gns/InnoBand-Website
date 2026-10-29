@@ -230,14 +230,6 @@ h1, h2 { margin-top: 0; font-family: var(--heading); letter-spacing: -.06em; lin
 :root[data-theme="light"] .booking-dialog { background: #fbfaf8; }
 :root[data-theme="light"] .booking-dialog .booking-form input, :root[data-theme="light"] .booking-dialog .booking-form select, :root[data-theme="light"] .booking-dialog .booking-form textarea { background: #fff; }
 
-@media (max-width: 980px) {
-  .site-header { padding-inline: 4vw; gap: 13px; }
-  .primary-nav { gap: 12px; font-size: 10px; }
-  .brand-logo { width: 128px; }
-  .theme-label { display: none; }
-  .section, .performance-section, .testimonial-section, .faq-section, .booking-section, .about-section { padding-inline: 6vw; }
-  .member-grid { grid-template-columns: repeat(4, 1fr); }
-}
 @media (max-width: 720px) {
   html { scroll-padding-top: 70px; }
   .site-header { height: 70px; padding-inline: 17px; gap: 9px; }
@@ -311,4 +303,96 @@ h1, h2 { margin-top: 0; font-family: var(--heading); letter-spacing: -.06em; lin
 .footer-brand .brand-logo { width: 174px; }
 @media (max-width: 720px) {
   .brand-logo, .footer-brand .brand-logo { width: 145px; max-height: 48px; }
+}
+
+/* Keep accent labels readable on the pale surfaces used by light mode. */
+:root[data-theme="light"] .primary-nav a:hover,
+:root[data-theme="light"] .quick-strip .strip-icon,
+:root[data-theme="light"] .genre-grid article > span,
+:root[data-theme="light"] .song-policy > span,
+:root[data-theme="light"] .setlist-summary strong,
+:root[data-theme="light"] .song-row-number,
+:root[data-theme="light"] .song-cta .open-booking,
+:root[data-theme="light"] .testimonial-empty > span,
+:root[data-theme="light"] .faq-list summary span,
+:root[data-theme="light"] .footer-email,
+:root[data-theme="light"] .footer-bottom b,
+:root[data-theme="light"] .form-heading span,
+:root[data-theme="light"] .theme-toggle > span:first-child { color: #795000; }
+:root[data-theme="light"] .booking-copy .eyebrow,
+:root[data-theme="light"] .booking-copy h2 em { color: var(--violet); }
+:root[data-theme="light"] .booking-contact > span { background: #6e56a81a; color: var(--violet); }
+:root[data-theme="light"] .search-box { color: #795000; }
+
+/* Give supporting copy enough size and contrast to stay readable in both themes. */
+.primary-nav { font-size: 12px; }
+.eyebrow, .blue-eyebrow, .hero .eyebrow { font-size: 10px; }
+.quick-strip strong { font-size: 10px; }
+.quick-strip small { font-size: 11px; }
+.genre-grid article > span, .about-values span { font-size: 10px; }
+.genre-grid p, .song-policy p, .section-heading > p, .about-copy > p,
+.faq-intro > p, .booking-copy > p { font-size: 13px; }
+.search-box input { font-size: 13px; }
+.song-count, .setlist-summary strong, .setlist-summary span,
+.setlist-actions > button:not(.button) { font-size: 11px; }
+.song-row-number { font-size: 11px; }
+.song-row-title { font-size: 12px; }
+.song-pick { font-size: 10px; }
+.song-cta, .song-cta .open-booking { font-size: 12px; }
+.photo-card figcaption small { font-size: 10px; }
+.photo-card figcaption strong { font-size: 13px; }
+.video-heading > p { font-size: 12px; }
+.video-grid figcaption, .poster-grid figcaption { font-size: 11px; }
+.about-values strong { font-size: 12px; }
+.about-values small, .member-grid span { font-size: 11px; }
+.member-grid strong { font-size: 12px; }
+.testimonial-empty strong { font-size: 13px; }
+.testimonial-empty small, .faq-list details p { font-size: 11px; }
+.faq-list summary { font-size: 13px; }
+.form-heading span { font-size: 10px; }
+.form-heading small, .form-note { font-size: 10px; }
+.booking-form label { font-size: 12px; }
+.booking-form input, .booking-form select, .booking-form textarea { font-size: 14px; }
+.site-footer > p, .footer-email { font-size: 12px; }
+.footer-bottom { font-size: 10px; }
+.theme-toggle { font-size: 11px; }
+
+@media (max-width: 980px) {
+  .site-header { padding-inline: 3vw; gap: 12px; }
+  .brand-logo { width: 128px; }
+  .theme-label { display: none; }
+  .primary-nav { gap: 12px; font-size: 11px; }
+  .section, .performance-section, .testimonial-section, .faq-section,
+  .booking-section, .about-section { padding-inline: 6vw; }
+  .member-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .site-header { padding-inline: 12px; gap: 8px; }
+  .brand-logo, .footer-brand .brand-logo { width: 132px; max-height: 44px; }
+  .theme-toggle { width: 36px; height: 36px; justify-content: center; padding: 0; }
+  .theme-label { display: none; }
+  .quick-strip { gap: 12px; padding: 18px 22px; }
+  .section-heading > p { font-size: 14px; line-height: 1.7; }
+  .site-footer { grid-template-columns: 1fr; gap: 14px; }
+  .site-footer > p { grid-column: auto; }
+  .footer-email { justify-self: start; }
+  .footer-bottom { display: grid; grid-template-columns: 1fr 1fr; }
+  .floating-book { bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 420px) {
+  .brand-logo, .footer-brand .brand-logo { width: 122px; max-height: 41px; }
+  .hero h1 { font-size: clamp(45px, 12.5vw, 51px); }
+  .section-heading h2, .about-copy h2, .faq-intro h2 { font-size: clamp(38px, 10.5vw, 48px); }
+  .quick-strip { padding-inline: 18px; }
+  .setlist-toolbar { padding: 11px; }
+  .setlist-summary { gap: 5px 8px; }
+  .gallery-grid { gap: 7px; }
+  .photo-card img, .photo-card:first-child img { height: 185px; }
+  .photo-card:first-child img { height: 220px; }
+  .poster-grid img { height: 350px; }
+  .booking-form { padding: 16px; }
+  .booking-dialog { padding: 18px; }
+  .dialog-head h2 { font-size: 30px; }
+  .footer-bottom { grid-template-columns: 1fr; }
 }
