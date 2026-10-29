@@ -160,7 +160,15 @@ document.querySelector('#booking-form').addEventListener('submit', (event) => {
     'Thank you!'
   ];
   const subject = `Innovation Band booking request — ${data.get('date')}`;
-  window.location.href = `mailto:markericgenosa2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  const composeUrl = new URL('https://mail.google.com/mail/');
+  composeUrl.search = new URLSearchParams({
+    view: 'cm',
+    fs: '1',
+    to: 'markericgenosa2@gmail.com',
+    su: subject,
+    body: lines.join('\n')
+  }).toString();
+  window.location.href = composeUrl.toString();
 });
 
 document.querySelector('#year').textContent = new Date().getFullYear();
